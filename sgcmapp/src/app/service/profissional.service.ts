@@ -2,23 +2,26 @@ import { Injectable } from '@angular/core';
 import { IService } from './i-service';
 import { Profissional } from '../model/profissional';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfissionalService implements IService<Profissional> {
 
-  constructor(private http:HttpClient) { }
-  apiUrl: string = environment.API_URL + "/proffisional/";
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  apiUrl: string = environment.API_URL + "/profissional/";
 
   get(termoBusca?: string | undefined): Observable<Profissional[]> {
     let url = this.apiUrl;
     if (termoBusca) {
       url += "busca/" + termoBusca;
     }
-    return this.http.get<Profissional[]>(url)
+    return this.http.get<Profissional[]>(url);
   }
 
   getById(id: number): Observable<Profissional> {
@@ -32,4 +35,5 @@ export class ProfissionalService implements IService<Profissional> {
   delete(id: number): Observable<void> {
     throw new Error('Method not implemented.');
   }
+
 }
