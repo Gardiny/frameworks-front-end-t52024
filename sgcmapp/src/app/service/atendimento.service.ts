@@ -25,7 +25,8 @@ export class AtendimentoService implements IService<Atendimento> {
   }
 
   getById(id: number): Observable<Atendimento> {
-    throw new Error('Method not implemented.');
+    let url = this.apiUrl + id;
+    return this.http.get<Atendimento>(url);
   }
 
   save(objeto: Atendimento): Observable<Atendimento> {

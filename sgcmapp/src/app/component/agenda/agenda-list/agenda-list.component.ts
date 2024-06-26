@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Atendimento } from '../../../model/atendimento';
 import { AtendimentoService } from '../../../service/atendimento.service';
 import { BarraComandosComponent } from '../../barra-comandos/barra-comandos.component';
@@ -8,7 +9,7 @@ import { IList } from '../../i-list';
 @Component({
   selector: 'app-agenda-list',
   standalone: true,
-  imports: [CommonModule, BarraComandosComponent],
+  imports: [CommonModule, BarraComandosComponent, RouterLink],
   templateUrl: './agenda-list.component.html',
   styles: ``
 })
@@ -32,7 +33,8 @@ export class AgendaListComponent implements IList<Atendimento> {
             return ['AGENDADO', 'CONFIRMADO'].includes(item.status);
           })
           .filter(item => {
-            let hoje = new Date().toISOString().split('T')[0];
+            let data = new Date().setHours(0, 0, 0, 0);
+            let hoje = new Date(data).toISOString().split('T')[0];
             return item.data >= hoje;
           })
           .sort((a: any, b: any) => {

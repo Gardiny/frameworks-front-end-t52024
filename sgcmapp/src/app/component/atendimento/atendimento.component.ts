@@ -32,7 +32,8 @@ export class AtendimentoComponent implements IList<Atendimento> {
             return ['CHEGADA', 'ATENDIMENTO'].includes(item.status);
           })
           .filter(item => {
-            let hoje = new Date().toISOString().split('T')[0];
+            let data = new Date().setHours(0, 0, 0, 0);
+            let hoje = new Date(data).toISOString().split('T')[0];
             return item.data == hoje;
           });
       }
